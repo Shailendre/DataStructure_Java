@@ -1,5 +1,3 @@
-package chap_3;
-
 import java.io.*;
 import java.util.Scanner;
 
