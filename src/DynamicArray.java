@@ -43,6 +43,41 @@ class DynamicArray {
 
     }
 
+    // assuming unique key or first key deletion
+    void deleteOperation(int el) {
+
+        int index = findIndexInArray(el);
+
+        if(index == -1) {
+            System.out.println(el + " not found");
+        }else {
+
+            for(int i = index; i<array.length-1; i++){
+
+                array[i] = array[i+1];
+
+            }
+
+        }
+
+    }
+
+    private int findIndexInArray(int el) {
+
+        for (int i = 0; i< array.length; i++){
+
+            if(array[i] == el){
+                return i;
+            }
+
+
+        }
+
+        return -1;
+
+
+    }
+
     @Override
     public String toString() {
 
@@ -69,6 +104,9 @@ class ArrayDriverClass {
 
         // insert ops
         dynamicArray.insertOperation(23);
+
+        // delete ops
+        dynamicArray.deleteOperation(23);
 
         // after insert ops
         System.out.println(dynamicArray);
