@@ -28,12 +28,11 @@ public class JumpSearch {
 
         }
             // linear search operation
-            for(int i = prevStepIndex; i <= nextStepIndex; i++) {
+        for(int i = prevStepIndex; i <= nextStepIndex; i++) {
 
-                if( arr[i] == key )
-                    return i + 1;
-
-            }
+               if( arr[i] == key )
+                   return i + 1;
+        }
 
 
         return -1;
