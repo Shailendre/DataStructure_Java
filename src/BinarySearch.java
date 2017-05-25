@@ -98,6 +98,99 @@ class FloorUsingBinarySearch {
 
     }
 
+}
+
+/**
+ * Problem Statement: Given a sorted array with possible duplicate elements.
+ * Find number of occurrences of input ‘key’ in log N time.
+ */
+
+class OccurrenceUsingBinarySearch {
+
+    int findExtremeLeftIndex (int[] a , int key ) {
+
+        int low = 0, mid;
+        int high = a.length - 1;
+
+        while ( low <= high ) {
+
+            mid = (low + high) >>> 1;
+
+            if ( key > a[mid] ) {
+
+                low = mid + 1;
+
+            } else if ( key < a[mid] ) {
+
+                high = mid - 1;
+
+            } else {
+
+                // if the key is found, and if, mid element is not first element, but left element is also key,
+                // then again perform the binary search, keeping low as 0 and high as left element of the found
+                if ( mid != 0 && a[mid -1] == key) {
+
+                    low = 0;
+                    high = mid - 1;
+
+                }
+
+                // otherwise element found is already extreme left
+                else {
+                    return mid + 1;
+                }
+
+            }
+
+        }
+
+
+        return -1;
+    }
+
+
+    int findExtremeRightIndex (int[] a, int key) {
+
+        int low = 0, high = a.length -1,mid;
+
+        while (low <= high) {
+
+
+            mid = (low + high) >>> 1;
+
+            if ( key > a[mid] ) {
+
+                low = mid + 1;
+
+            }
+            else if ( key < a[mid] ) {
+
+                high = mid - 1;
+
+            }
+            else {
+
+                // if the key is not the last element, and it next element is still the key element
+                // perform the search again
+                if( mid != a.length -1 && a[mid + 1] == key ) {
+
+                    low = mid + 1;
+                    high = a.length -1;
+
+                }
+                // return the extreme right index
+                else {
+                    return mid + 1;
+                }
+
+
+            }
+
+        }
+
+        return -1;
+
+    }
 
 }
 
@@ -105,17 +198,23 @@ class BinarySearchDriver {
 
     public static void main(String[] args) {
 
-        int[] arr = {1,12,23,34,45,56,67,78};
+        int[] arr = {1,12,34,34,34,34,45,56,78,78};
 
         BinarySearch binarySearch = new BinarySearch();
 
         FloorUsingBinarySearch floorUsingBinarySearch = new FloorUsingBinarySearch();
+
+        OccurrenceUsingBinarySearch occurrenceUsingBinarySearch = new OccurrenceUsingBinarySearch();
 
         System.out.println("Element found at : " + binarySearch.find(arr, 8));
 
         System.out.println("Element found at : " + binarySearch.find(arr, 34));
 
         System.out.println("Floor element: " + floorUsingBinarySearch.find(arr,10));
+
+        System.out.println("Left index at: " + occurrenceUsingBinarySearch.findExtremeLeftIndex(arr, 34));
+
+        System.out.println("Right index at: " + occurrenceUsingBinarySearch.findExtremeRightIndex(arr, 78));
 
     }
 
