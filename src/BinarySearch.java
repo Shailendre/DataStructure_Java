@@ -194,17 +194,74 @@ class OccurrenceUsingBinarySearch {
 
 }
 
+/**
+ * Problem Statement: Given a sorted array of distinct elements, and the array is rotated at an unknown position.
+ * Find minimum element in the array.
+ */
+
+class MinimumInRotatedArray {
+
+
+    int find (int[] a) {
+
+
+        int low = 0, high = a.length -1, mid, el;
+
+        while (low <= high ) {
+
+            mid = (low + high) >>> 1;
+
+            el = a[mid] ;
+
+            // if already sorted
+            if( a[low] <= a[high]) {
+
+                return a[low];
+
+            }
+            // if element present in right half
+            else if ( a[high] < el ) {
+
+                low = mid + 1;
+            }
+            // if element present in left half
+            else if ( a[low]  > el ) {
+
+                high = mid - 1;
+            }
+            // if mid element is the minimum
+            else  {
+
+                return el;
+            }
+
+
+        }
+
+        return -1;
+
+
+    }
+
+
+
+}
+
 class BinarySearchDriver {
 
     public static void main(String[] args) {
 
         int[] arr = {1,12,34,34,34,34,45,56,78,78};
 
+        int[] a = {3,4,5,6,7,8,9,10,1,2};
+
         BinarySearch binarySearch = new BinarySearch();
 
         FloorUsingBinarySearch floorUsingBinarySearch = new FloorUsingBinarySearch();
 
         OccurrenceUsingBinarySearch occurrenceUsingBinarySearch = new OccurrenceUsingBinarySearch();
+
+        MinimumInRotatedArray minimumInRotatedArray = new MinimumInRotatedArray();
 
         System.out.println("Element found at : " + binarySearch.find(arr, 8));
 
@@ -215,6 +272,8 @@ class BinarySearchDriver {
         System.out.println("Left index at: " + occurrenceUsingBinarySearch.findExtremeLeftIndex(arr, 34));
 
         System.out.println("Right index at: " + occurrenceUsingBinarySearch.findExtremeRightIndex(arr, 78));
+
+        System.out.println("Minimum element: " + minimumInRotatedArray.find(a));
 
     }
 
