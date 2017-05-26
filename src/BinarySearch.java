@@ -7,13 +7,22 @@ class BinarySearch {
 
     int find (int[] arr, int key) {
 
-        int low = 0, high = arr.length-1, mid, midEl;
+        int low = 0, high = arr.length-1;
+
+        return findByRange(arr, low, high, key);
+
+
+    }
+
+    int findByRange (int[] a, int low, int high, int key) {
+
+        int mid, midEl;
 
         while (low <= high ){
 
             mid = (low + high) >>> 1; // unsigned right shift => operation similar to divide by 2
 
-            midEl = arr[mid];
+            midEl = a[mid];
 
             if( key < midEl ){
                 high = mid - 1;
